@@ -1,0 +1,21 @@
+
+> backend@0.0.1 start:dev
+> nest start --watch
+
+
+[48;2;60;190;100m[1m[38;2;0;0;0m Info [39m[22m[49m Webpack is building your sources...
+
+webpack 5.106.2 compiled [1m[32msuccessfully[39m[22m in 793 ms
+
+[48;2;60;190;100m[1m[38;2;0;0;0m Info [39m[22m[49m Webpack is building your sources...
+
+[36mType-checking in progress...[39m
+webpack 5.106.2 compiled [1m[32msuccessfully[39m[22m in 51 ms
+[36mType-checking in progress...[39m
+[32m[Nest] 17108  - [39m13/06/2026, 3:41:37 pm [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 17108  - [39m13/06/2026, 3:41:37 pm [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +200ms[39m
+[32m[Nest] 17108  - [39m13/06/2026, 3:41:37 pm [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +5ms[39m
+[32m[Nest] 17108  - [39m13/06/2026, 3:41:37 pm [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +5ms[39m
+[32m[Nest] 17108  - [39m13/06/2026, 3:41:37 pm [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +338ms[39m
+Backend is running on: http://localhost:4000
+[32mNo typescript errors found.[39m

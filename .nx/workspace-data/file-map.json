@@ -1,0 +1,752 @@
+{
+  "version": "6.0",
+  "nxVersion": "22.7.5",
+  "pathMappings": {},
+  "nxJsonPlugins": [
+    {
+      "name": "@nx/js/typescript",
+      "options": {
+        "typecheck": {
+          "targetName": "typecheck"
+        },
+        "build": {
+          "targetName": "build",
+          "configName": "tsconfig.lib.json",
+          "buildDepsName": "build-deps",
+          "watchDepsName": "watch-deps"
+        }
+      }
+    }
+  ],
+  "fileMap": {
+    "nonProjectFiles": [
+      {
+        "file": ".prettierignore",
+        "hash": "14688272390704683536"
+      },
+      {
+        "file": ".prettierrc",
+        "hash": "16267754514737964994"
+      },
+      {
+        "file": "nx.json",
+        "hash": "9485575345826851642"
+      },
+      {
+        "file": "package-lock.json",
+        "hash": "16781364346586491153"
+      },
+      {
+        "file": "package.json",
+        "hash": "2339120433792687367"
+      },
+      {
+        "file": "tsconfig.base.json",
+        "hash": "17675684958249859478"
+      },
+      {
+        "file": "tsconfig.json",
+        "hash": "16813293144718777467"
+      }
+    ],
+    "projectFileMap": {
+      "shared": [
+        {
+          "file": "shared/README.md",
+          "hash": "11786132251247811791"
+        },
+        {
+          "file": "shared/package.json",
+          "hash": "5602045396429200020"
+        },
+        {
+          "file": "shared/src/index.ts",
+          "hash": "14556581362216704711"
+        },
+        {
+          "file": "shared/src/lib/shared.module.ts",
+          "hash": "11646460083537414907",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "shared/tsconfig.json",
+          "hash": "6774177574860209080"
+        },
+        {
+          "file": "shared/tsconfig.lib.json",
+          "hash": "1866347935379936269"
+        }
+      ],
+      "backend": [
+        {
+          "file": "backend/.gitignore",
+          "hash": "12634402967133909834"
+        },
+        {
+          "file": "backend/.prettierrc",
+          "hash": "14145419060237914883"
+        },
+        {
+          "file": "backend/README.md",
+          "hash": "13123434361241207768"
+        },
+        {
+          "file": "backend/apps/auth-service/src/auth-service.controller.spec.ts",
+          "hash": "10577464113876979067",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "backend/apps/auth-service/src/auth-service.controller.ts",
+          "hash": "13949023178819454093",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "backend/apps/auth-service/src/auth-service.module.ts",
+          "hash": "8760084320768094320",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "backend/apps/auth-service/src/auth-service.service.ts",
+          "hash": "8783925986190864720",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "backend/apps/auth-service/src/main.ts",
+          "hash": "14454404079253972716",
+          "deps": [
+            "npm:@nestjs/core"
+          ]
+        },
+        {
+          "file": "backend/apps/auth-service/test/app.e2e-spec.ts",
+          "hash": "5649432382998704427",
+          "deps": [
+            "npm:@nestjs/testing",
+            "npm:@nestjs/common",
+            "npm:supertest"
+          ]
+        },
+        {
+          "file": "backend/apps/auth-service/test/jest-e2e.json",
+          "hash": "10645908491471703423"
+        },
+        {
+          "file": "backend/apps/auth-service/tsconfig.app.json",
+          "hash": "362644433543885834"
+        },
+        {
+          "file": "backend/apps/backend/src/app.module.ts",
+          "hash": "990467628745992846",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config"
+          ]
+        },
+        {
+          "file": "backend/apps/backend/src/main.ts",
+          "hash": "3064876326473044731",
+          "deps": [
+            "npm:@nestjs/core"
+          ]
+        },
+        {
+          "file": "backend/apps/backend/tsconfig.app.json",
+          "hash": "15080345426403087922"
+        },
+        {
+          "file": "backend/apps/collab-service/src/collab-service.controller.spec.ts",
+          "hash": "3681350062370645438",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "backend/apps/collab-service/src/collab-service.controller.ts",
+          "hash": "18180156903210049011",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "backend/apps/collab-service/src/collab-service.module.ts",
+          "hash": "921606458733540126",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "backend/apps/collab-service/src/collab-service.service.ts",
+          "hash": "14077570147593063061",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "backend/apps/collab-service/src/main.ts",
+          "hash": "16304933861797018411",
+          "deps": [
+            "npm:@nestjs/core"
+          ]
+        },
+        {
+          "file": "backend/apps/collab-service/test/app.e2e-spec.ts",
+          "hash": "15944251436864869404",
+          "deps": [
+            "npm:@nestjs/testing",
+            "npm:@nestjs/common",
+            "npm:supertest"
+          ]
+        },
+        {
+          "file": "backend/apps/collab-service/test/jest-e2e.json",
+          "hash": "10645908491471703423"
+        },
+        {
+          "file": "backend/apps/collab-service/tsconfig.app.json",
+          "hash": "18159882736014311453"
+        },
+        {
+          "file": "backend/apps/comment-service/src/comment-service.controller.spec.ts",
+          "hash": "2479540628098493769",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "backend/apps/comment-service/src/comment-service.controller.ts",
+          "hash": "10402076379436342362",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "backend/apps/comment-service/src/comment-service.module.ts",
+          "hash": "3195298713352623587",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "backend/apps/comment-service/src/comment-service.service.ts",
+          "hash": "13039042087162264025",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "backend/apps/comment-service/src/main.ts",
+          "hash": "372208403398832895",
+          "deps": [
+            "npm:@nestjs/core"
+          ]
+        },
+        {
+          "file": "backend/apps/comment-service/test/app.e2e-spec.ts",
+          "hash": "16908521192795003845",
+          "deps": [
+            "npm:@nestjs/testing",
+            "npm:@nestjs/common",
+            "npm:supertest"
+          ]
+        },
+        {
+          "file": "backend/apps/comment-service/test/jest-e2e.json",
+          "hash": "10645908491471703423"
+        },
+        {
+          "file": "backend/apps/comment-service/tsconfig.app.json",
+          "hash": "7158622463629072934"
+        },
+        {
+          "file": "backend/apps/execut-service/src/execut-service.controller.spec.ts",
+          "hash": "2497472979785467431",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "backend/apps/execut-service/src/execut-service.controller.ts",
+          "hash": "4890095576776231624",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "backend/apps/execut-service/src/execut-service.module.ts",
+          "hash": "7586155755647092416",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "backend/apps/execut-service/src/execut-service.service.ts",
+          "hash": "15968433888634392733",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "backend/apps/execut-service/src/main.ts",
+          "hash": "1331679977789834661",
+          "deps": [
+            "npm:@nestjs/core"
+          ]
+        },
+        {
+          "file": "backend/apps/execut-service/test/app.e2e-spec.ts",
+          "hash": "9830249566013090338",
+          "deps": [
+            "npm:@nestjs/testing",
+            "npm:@nestjs/common",
+            "npm:supertest"
+          ]
+        },
+        {
+          "file": "backend/apps/execut-service/test/jest-e2e.json",
+          "hash": "10645908491471703423"
+        },
+        {
+          "file": "backend/apps/execut-service/tsconfig.app.json",
+          "hash": "4123165350155168281"
+        },
+        {
+          "file": "backend/apps/file-service/src/file-service.controller.spec.ts",
+          "hash": "11687855990600614913",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "backend/apps/file-service/src/file-service.controller.ts",
+          "hash": "7276816931316484294",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "backend/apps/file-service/src/file-service.module.ts",
+          "hash": "15162567419459138191",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "backend/apps/file-service/src/file-service.service.ts",
+          "hash": "6399875734321162678",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "backend/apps/file-service/src/main.ts",
+          "hash": "13167402543345543135",
+          "deps": [
+            "npm:@nestjs/core"
+          ]
+        },
+        {
+          "file": "backend/apps/file-service/test/app.e2e-spec.ts",
+          "hash": "10832139506418657242",
+          "deps": [
+            "npm:@nestjs/testing",
+            "npm:@nestjs/common",
+            "npm:supertest"
+          ]
+        },
+        {
+          "file": "backend/apps/file-service/test/jest-e2e.json",
+          "hash": "10645908491471703423"
+        },
+        {
+          "file": "backend/apps/file-service/tsconfig.app.json",
+          "hash": "10899830073284553360"
+        },
+        {
+          "file": "backend/apps/notification-service/src/main.ts",
+          "hash": "6109184706611256887",
+          "deps": [
+            "npm:@nestjs/core"
+          ]
+        },
+        {
+          "file": "backend/apps/notification-service/src/notification-service.controller.spec.ts",
+          "hash": "16056298760431138574",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "backend/apps/notification-service/src/notification-service.controller.ts",
+          "hash": "10520363544556015544",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "backend/apps/notification-service/src/notification-service.module.ts",
+          "hash": "8058173538965036788",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "backend/apps/notification-service/src/notification-service.service.ts",
+          "hash": "17817972936000629379",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "backend/apps/notification-service/test/app.e2e-spec.ts",
+          "hash": "1938033116404415991",
+          "deps": [
+            "npm:@nestjs/testing",
+            "npm:@nestjs/common",
+            "npm:supertest"
+          ]
+        },
+        {
+          "file": "backend/apps/notification-service/test/jest-e2e.json",
+          "hash": "10645908491471703423"
+        },
+        {
+          "file": "backend/apps/notification-service/tsconfig.app.json",
+          "hash": "4605251751401263863"
+        },
+        {
+          "file": "backend/apps/permission-service/src/main.ts",
+          "hash": "2388584935573849946",
+          "deps": [
+            "npm:@nestjs/core"
+          ]
+        },
+        {
+          "file": "backend/apps/permission-service/src/permission-service.controller.spec.ts",
+          "hash": "16001501946204645690",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "backend/apps/permission-service/src/permission-service.controller.ts",
+          "hash": "15964734410642846384",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "backend/apps/permission-service/src/permission-service.module.ts",
+          "hash": "94542920012993728",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "backend/apps/permission-service/src/permission-service.service.ts",
+          "hash": "4914240912468501569",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "backend/apps/permission-service/test/app.e2e-spec.ts",
+          "hash": "17835390134914123447",
+          "deps": [
+            "npm:@nestjs/testing",
+            "npm:@nestjs/common",
+            "npm:supertest"
+          ]
+        },
+        {
+          "file": "backend/apps/permission-service/test/jest-e2e.json",
+          "hash": "10645908491471703423"
+        },
+        {
+          "file": "backend/apps/permission-service/tsconfig.app.json",
+          "hash": "3760160237582823199"
+        },
+        {
+          "file": "backend/apps/project-service/src/main.ts",
+          "hash": "5496188777761605636",
+          "deps": [
+            "npm:@nestjs/core"
+          ]
+        },
+        {
+          "file": "backend/apps/project-service/src/project-service.controller.spec.ts",
+          "hash": "15976362879975934118",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "backend/apps/project-service/src/project-service.controller.ts",
+          "hash": "2613308037033940930",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "backend/apps/project-service/src/project-service.module.ts",
+          "hash": "7521632067433470305",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "backend/apps/project-service/src/project-service.service.ts",
+          "hash": "17364500919660909142",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "backend/apps/project-service/test/app.e2e-spec.ts",
+          "hash": "15000953469475790151",
+          "deps": [
+            "npm:@nestjs/testing",
+            "npm:@nestjs/common",
+            "npm:supertest"
+          ]
+        },
+        {
+          "file": "backend/apps/project-service/test/jest-e2e.json",
+          "hash": "10645908491471703423"
+        },
+        {
+          "file": "backend/apps/project-service/tsconfig.app.json",
+          "hash": "16798507050172723604"
+        },
+        {
+          "file": "backend/apps/runner-service/src/main.ts",
+          "hash": "3510169907185462617",
+          "deps": [
+            "npm:@nestjs/core"
+          ]
+        },
+        {
+          "file": "backend/apps/runner-service/src/runner-service.controller.spec.ts",
+          "hash": "100806501852963194",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "backend/apps/runner-service/src/runner-service.controller.ts",
+          "hash": "3109692803286173783",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "backend/apps/runner-service/src/runner-service.module.ts",
+          "hash": "7343764190024420662",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "backend/apps/runner-service/src/runner-service.service.ts",
+          "hash": "13668514351891037006",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "backend/apps/runner-service/test/app.e2e-spec.ts",
+          "hash": "4865021649260442331",
+          "deps": [
+            "npm:@nestjs/testing",
+            "npm:@nestjs/common",
+            "npm:supertest"
+          ]
+        },
+        {
+          "file": "backend/apps/runner-service/test/jest-e2e.json",
+          "hash": "10645908491471703423"
+        },
+        {
+          "file": "backend/apps/runner-service/tsconfig.app.json",
+          "hash": "11467554274483742964"
+        },
+        {
+          "file": "backend/eslint.config.mjs",
+          "hash": "17520456152920331010",
+          "deps": [
+            "npm:@eslint/js",
+            "npm:eslint-plugin-prettier",
+            "npm:globals",
+            "npm:typescript-eslint"
+          ]
+        },
+        {
+          "file": "backend/nest-cli.json",
+          "hash": "1548113740947020816"
+        },
+        {
+          "file": "backend/package-lock.json",
+          "hash": "666366625377235136"
+        },
+        {
+          "file": "backend/package.json",
+          "hash": "4056073042410575987",
+          "deps": [
+            "npm:@eslint/eslintrc",
+            "npm:@eslint/js",
+            "npm:@nestjs/cli",
+            "npm:@nestjs/schematics",
+            "npm:@nestjs/testing",
+            "npm:@types/express",
+            "npm:@types/jest",
+            "npm:@types/node@24.13.2",
+            "npm:@types/supertest",
+            "npm:eslint",
+            "npm:eslint-config-prettier",
+            "npm:eslint-plugin-prettier",
+            "npm:globals",
+            "npm:jest",
+            "npm:prettier",
+            "npm:source-map-support",
+            "npm:supertest",
+            "npm:ts-jest",
+            "npm:ts-loader",
+            "npm:ts-node",
+            "npm:tsconfig-paths",
+            "npm:typescript",
+            "npm:typescript-eslint",
+            "npm:@nestjs/common",
+            "npm:@nestjs/config",
+            "npm:@nestjs/core",
+            "npm:@nestjs/microservices",
+            "npm:@nestjs/platform-express",
+            "npm:reflect-metadata@0.2.2",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "backend/tsconfig.build.json",
+          "hash": "9666801268768259513"
+        },
+        {
+          "file": "backend/tsconfig.json",
+          "hash": "8361897858945822555"
+        }
+      ],
+      "frontend": [
+        {
+          "file": "frontend/.gitignore",
+          "hash": "1867017717006394117"
+        },
+        {
+          "file": "frontend/AGENTS.md",
+          "hash": "15906301450998190670"
+        },
+        {
+          "file": "frontend/CLAUDE.md",
+          "hash": "13810932929442405996"
+        },
+        {
+          "file": "frontend/README.md",
+          "hash": "10766794746169900117"
+        },
+        {
+          "file": "frontend/app/favicon.ico",
+          "hash": "9157999678830540297"
+        },
+        {
+          "file": "frontend/app/globals.css",
+          "hash": "13803416617225302536"
+        },
+        {
+          "file": "frontend/app/layout.tsx",
+          "hash": "2300502926212612334",
+          "deps": [
+            "npm:next"
+          ]
+        },
+        {
+          "file": "frontend/app/page.tsx",
+          "hash": "13592639602626924173",
+          "deps": [
+            "npm:next"
+          ]
+        },
+        {
+          "file": "frontend/eslint.config.mjs",
+          "hash": "11456145150381806295",
+          "deps": [
+            "npm:eslint",
+            "npm:eslint-config-next"
+          ]
+        },
+        {
+          "file": "frontend/next.config.ts",
+          "hash": "17157214668998829023",
+          "deps": [
+            "npm:next"
+          ]
+        },
+        {
+          "file": "frontend/package-lock.json",
+          "hash": "6220360627011849138"
+        },
+        {
+          "file": "frontend/package.json",
+          "hash": "1367094471246432454",
+          "deps": [
+            "npm:@tailwindcss/postcss",
+            "npm:@types/node@20.19.43",
+            "npm:@types/react",
+            "npm:@types/react-dom",
+            "npm:eslint",
+            "npm:eslint-config-next",
+            "npm:tailwindcss",
+            "npm:typescript",
+            "npm:next",
+            "npm:react",
+            "npm:react-dom"
+          ]
+        },
+        {
+          "file": "frontend/postcss.config.mjs",
+          "hash": "12094959087305894889"
+        },
+        {
+          "file": "frontend/public/file.svg",
+          "hash": "15617830351863523835"
+        },
+        {
+          "file": "frontend/public/globe.svg",
+          "hash": "9134466864871335697"
+        },
+        {
+          "file": "frontend/public/next.svg",
+          "hash": "8300767200008744458"
+        },
+        {
+          "file": "frontend/public/vercel.svg",
+          "hash": "3007623926711696394"
+        },
+        {
+          "file": "frontend/public/window.svg",
+          "hash": "16677869292061012332"
+        },
+        {
+          "file": "frontend/tsconfig.json",
+          "hash": "8097238392793607448"
+        }
+      ]
+    }
+  },
+  "externalNodesHash": "10328886898136197795"
+}

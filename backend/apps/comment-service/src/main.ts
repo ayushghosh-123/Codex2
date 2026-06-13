@@ -3,6 +3,8 @@ import { CommentServiceModule } from './comment-service.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(CommentServiceModule);
-  await app.listen(process.env.port ?? 3000);
+  const port = process.env.COMMENT_SERVICE_PORT || 4005;
+  await app.listen(port);
+  console.log(`Comment Service is running on: http://localhost:${port}`);
 }
 bootstrap();
