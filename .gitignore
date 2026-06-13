@@ -9,8 +9,7 @@ out/
 dist/
 
 # Nx cache & workspace metadata
-.nx/cache/
-.nx/workspace-data/
+.nx/
 
 # Environment files
 .env
