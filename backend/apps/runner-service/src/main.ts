@@ -3,6 +3,8 @@ import { RunnerServiceModule } from './runner-service.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(RunnerServiceModule);
-  await app.listen(process.env.port ?? 3000);
+  const port = process.env.RUNNER_SERVICE_PORT || 4007;
+  await app.listen(port);
+  console.log(`Runner Service is running on: http://localhost:${port}`);
 }
 bootstrap();

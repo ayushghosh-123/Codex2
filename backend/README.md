@@ -1,98 +1,180 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 🖥️ Codex2 Backend Services
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Welcome to the backend architecture repository of **Codex2**. The backend is built as a modular microservices monorepo using **NestJS** and structured to support horizontal scaling, containerized secure code execution, and real-time collaboration.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+## 🛠️ High-Level Backend Architecture
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+The backend operates on a **Decoupled Microservices Design**, orchestrated through the root Nx Monorepo configuration.
 
-## Project setup
+```mermaid
+graph TD
+    Client["Client Browser (Next.js / Monaco / Yjs)"]
+    Gateway["API Gateway (backend App) <br/> :4000"]
+    
+    %% Downstream Services
+    Auth["Auth Service <br/> :4001"]
+    Project["Project Service <br/> :4002"]
+    File["File Service <br/> :4003"]
+    Collab["Collab Service (WebSockets) <br/> :4004"]
+    Comment["Comment Service <br/> :4005"]
+    Execut["Execution Service <br/> :4006"]
+    Runner["Runner Service <br/> :4007"]
+    Permission["Permission Service <br/> :4008"]
+    Notification["Notification Service <br/> :4009"]
 
-```bash
-$ npm install
+    %% Shared Databases & Storage
+    DB[("PostgreSQL <br/> (Transactional DB)")]
+    RedisCache[("Redis <br/> (Presence, Queues, Cache)")]
+    S3Storage[("AWS S3 / MinIO <br/> (File Storage)")]
+    Sandbox[["Isolated Sandbox <br/> (gVisor/Docker)"]]
+
+    %% Client and Gateway routing
+    Client -- "HTTP / WS" --> Gateway
+    Client -- "WebSocket Sync" --> Collab
+    
+    %% API Gateway to Microservices
+    Gateway --> Auth
+    Gateway --> Project
+    Gateway --> File
+    Gateway --> Comment
+    Gateway --> Execut
+    Gateway --> Permission
+    Gateway --> Notification
+
+    %% Backing Services Connections
+    Project & Auth & Comment & Permission --> DB
+    File --> S3Storage
+    Collab --> RedisCache
+    Notification --> RedisCache
+    Execut -- "BullMQ Jobs" --> RedisCache
+    RedisCache -- "Pulls Run Jobs" --> Runner
+    Runner -- "Sandbox execution" --> Sandbox
 ```
 
-## Compile and run the project
+### Communication Protocols
+1. **Client-to-Gateway:** HTTPS / REST APIs for CRUD operations and WebSocket (`socket.io`) for real-time collaboration & terminal streaming.
+2. **Service-to-Service (Synchronous):** High-speed NestJS Microservices TCP/gRPC layer for low latency RPC calls.
+3. **Service-to-Service (Asynchronous):** Redis Pub/Sub for event broadcasting (e.g. notifications).
+4. **Distributed Task Queue:** BullMQ (powered by Redis) for buffering code execution requests.
 
-```bash
-# development
-$ npm run start
+---
 
-# watch mode
-$ npm run start:dev
+## 📂 Backend File & Directory Structure
 
-# production mode
-$ npm run start:prod
+```text
+backend/
+├── apps/                               # Monorepo NestJS Microservices
+│   ├── auth-service/                  # Manages user identity, JWTs, and session lifecycles (Port 4001)
+│   ├── backend/                       # API Gateway & Client reverse proxy entry point (Port 4000)
+│   ├── collab-service/                # Real-time document sync via WebSockets + Yjs CRDTs (Port 4004)
+│   ├── comment-service/               # Threaded code discussions and user @mentions (Port 4005)
+│   ├── execut-service/                # Job verification & task ingestion into BullMQ queue (Port 4006)
+│   ├── file-service/                  # Files/directories management and S3 metadata syncing (Port 4003)
+│   ├── notification-service/          # In-app WS notifications, web push, and emails (Port 4009)
+│   ├── permission-service/            # Granular RBAC and ACL policy verification (Port 4008)
+│   ├── project-service/               # Projects, workspaces, and workspace profiles (Port 4002)
+│   └── runner-service/                # Isolated execution processor running code in gVisor (Port 4007)
+├── dist/                              # Target folder for production compilation output
+├── .env                               # Local environment configurations (defines ports)
+├── .gitignore                         # Git exclusion rules
+├── .prettierrc                        # Prettier code formatting styles
+├── eslint.config.mjs                  # Backend linting guidelines and static code analysis rules
+├── nest-cli.json                      # NestJS Workspace definition mapping monorepo apps
+├── package.json                       # Service-specific dependencies, scripts, and runtime engines
+├── tsconfig.build.json                # TypeScript compilation config for production
+└── tsconfig.json                      # TypeScript root compiler rules and path configurations
 ```
 
-## Run tests
+---
 
+## 📦 Microservices Breakdown
+
+### 1. API Gateway (`backend`) — Port 4000
+Acts as the single point of entry for client web applications. It handles:
+* Reverse-proxying API calls to correct downstream services.
+* SSL/TLS termination, rate limiting (`@nestjs/throttler`), and request validation.
+* Unified JWT decoding and validation before passing requests down.
+
+### 2. Auth Service — Port 4001
+Manages user authentication:
+* Login, registration, OAuth2 providers (Google, GitHub), and JWT signing.
+* Password hashing using Argon2.
+
+### 3. Project Service — Port 4002
+Handles workspace project lifecycle metadata:
+* Creating, reading, updating, and deleting project profiles.
+* Managing compiler/interpreter configurations for project environments.
+
+### 4. File Service — Port 4003
+Governs source code files and directories:
+* Compiling nested directories into a flat tree structure.
+* Persisting source code files in S3/MinIO objects or local disk storage.
+
+### 5. Collab Service — Port 4004
+Powers collaborative real-time editing:
+* Handles active WebSocket links.
+* Synchronizes documents collision-free using **Yjs** CRDTs.
+* Tracks collaborative cursors and online presence within projects.
+
+### 6. Comment Service — Port 4005
+Manages codebase interactions:
+* Links threaded comments to specific files, line indices, and character coordinates.
+* Parses user `@mentions` and routes target alerts.
+
+### 7. Execution Service — Port 4006
+Ingests compilation and running tasks:
+* Decides if run requests are structurally sound.
+* Submits execution payloads to the Redis Job Queue (BullMQ).
+
+### 8. Runner Service — Port 4007
+Securely runs untrusted code:
+* Consumes scheduled jobs from the Redis queue.
+* Spawns sandboxed Docker containers (running under `gVisor`) with strict runtime limitations.
+* Streams runtime console output (`stdout`/`stderr`) and exit codes back.
+
+### 9. Permission Service — Port 4008
+Evaluates authorization policies:
+* Stores RBAC roles and ACLs.
+* Checks if a user holds `Read`, `Write`, or `Execute` rights before service controllers process the request.
+
+### 10. Notification Service — Port 4009
+Central alerts dispatching hub:
+* Receives event notices (like mentions or project invites) via Redis Pub/Sub.
+* Sends real-time WebSocket notifications or falls back to email queues.
+
+---
+
+## 🚀 Running & Building Services
+
+Make sure you are in the `backend/` directory to run these commands:
+
+### Install Dependencies
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm install
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
+### Start Services in Development Mode (with hot-reloading)
+To launch the API Gateway (or any specific service, swap `backend` with the app name from `nest-cli.json`):
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+npx nest start backend --watch
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### Production Build
+Compile all applications to the `dist/` directory:
+```bash
+npm run build
+```
 
-## Resources
+### Linting and Formatting
+Check and fix coding styles:
+```bash
+npm run lint
+npm run format
+```
 
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+### Run Tests
+```bash
+npm run test
+```
