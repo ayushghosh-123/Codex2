@@ -1,10 +1,17 @@
 import { Module } from '@nestjs/common';
-import { RunnerServiceController } from './runner-service.controller';
-import { RunnerServiceService } from './runner-service.service';
+import { BullModule } from '@nestjs/bullmq';
+import { RunnerProcessor } from './runner.processor';
 
 @Module({
-  imports: [],
-  controllers: [RunnerServiceController],
-  providers: [RunnerServiceService],
+  imports: [
+    BullModule.forRoot({
+      connection: {
+        host: process.env.REDIS_HOST || 'localhost',
+        port: Number(process.env.REDIS_PORT) || 6379,
+      },
+    }),
+    BullModule.registerQueue({ name: 'code-execution' }),
+  ],
+  providers: [RunnerProcessor],
 })
 export class RunnerServiceModule {}

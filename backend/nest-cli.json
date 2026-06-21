@@ -4,7 +4,7 @@
   "sourceRoot": "apps/backend/src",
   "compilerOptions": {
     "deleteOutDir": true,
-    "webpack": true,
+    "webpack": false,
     "tsConfigPath": "apps/backend/tsconfig.app.json"
   },
   "monorepo": true,
@@ -118,6 +118,11 @@
         "tsConfigPath": "apps/runner-service/tsconfig.app.json"
       }
     },
+     "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": false,
+    "tsConfigPath": "apps/backend/tsconfig.app.json"
+  },
     "runnerservice": {
       "type": "application",
       "root": "apps/runnerservice",

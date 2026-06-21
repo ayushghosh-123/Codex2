@@ -1,9 +1,18 @@
-{
-  "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "declaration": false,
-    "outDir": "../../dist/apps/collab-service"
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "test", "**/*spec.ts"]
+﻿{
+    "extends":  "../../tsconfig.json",
+    "compilerOptions":  {
+                            "declaration":  false,
+                            "outDir":  "../../dist/apps/collab-service",
+                            "experimentalDecorators":  true,
+                            "emitDecoratorMetadata":  true
+                        },
+    "include":  [
+                    "src/**/*"
+                ],
+    "exclude":  [
+                    "node_modules",
+                    "dist",
+                    "test",
+                    "**/*spec.ts"
+                ]
 }

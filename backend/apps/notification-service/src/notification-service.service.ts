@@ -2,7 +2,8 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class NotificationServiceService {
-  getHello(): string {
-    return 'Hello World!';
+  send(data: { userId: string; message: string; type: string }) {
+    console.log(`[Notification Alert] User ${data.userId}: ${data.message}`);
+    return { dispatched: true };
   }
 }
